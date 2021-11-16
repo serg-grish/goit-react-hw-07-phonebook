@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import s from "./Filter.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { getFilter } from "../../redux/selectors";
-import contactsActions from "../../redux/actions";
+import * as contactsActions from "../../redux/actions";
 
 const Filter = () => {
   const value = useSelector(getFilter);
