@@ -3,14 +3,19 @@ import React from "react";
 import PropTypes from "prop-types";
 import ContactListItem from "./ContactListItem/ContactListItem";
 import { useSelector, useDispatch } from "react-redux";
-import contactsActions from "../../redux/actions";
+import contactsOperation from "../../redux/operations";
 import { getVisibleContacts } from "../../redux/selectors";
+import { useEffect } from 'react';
 
 export default function ContactList() {
-  const contacts = useSelector(getVisibleContacts);
   const dispatch = useDispatch();
 
-  const onDeleteContact = (id) => dispatch(contactsActions.deleteContact(id));
+  useEffect(() => {
+    dispatch(contactsOperation.fetchContacts());
+  }, [dispatch]);
+  const contacts = useSelector(getVisibleContacts);
+
+  const onDeleteContact = (id) => dispatch(contactsOperation.deleteContact(id));
 
   return (
     <ul className={s.list}>
@@ -34,5 +39,4 @@ ContactList.propTypes = {
       number: PropTypes.string.isRequired,
     })
   ),
-  onDeleteContact: PropTypes.func,
 };

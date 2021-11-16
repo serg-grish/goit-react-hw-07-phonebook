@@ -12,7 +12,9 @@ export default function App() {
       <FormContact />
 
       <h2>Contants</h2>
+
       <Filter />
+      
       <ContactsList />
     </>
   );
