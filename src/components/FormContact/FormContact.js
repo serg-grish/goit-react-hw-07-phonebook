@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import s from "./FormContact.module.css";
-import PropTypes from "prop-types";
 import { useSelector, useDispatch } from "react-redux";
-import contactsActions from "../../redux/actions";
+import contactsOperations from "../../redux/operations";
 import { getContacts } from "../../redux/selectors";
+import shortid from "shortid";
 
 export default function ContactForm() {
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
+
+  const contactNameId = shortid.generate();
+  const contactNumberId = shortid.generate();
 
   const dispatch = useDispatch();
   const contacts = useSelector(getContacts);
@@ -45,7 +48,7 @@ export default function ContactForm() {
       return;
     }
 
-    dispatch(contactsActions.addContact(name, number));
+    dispatch(contactsOperations.addContact(name, number));
     reset();
   };
 
@@ -56,7 +59,7 @@ export default function ContactForm() {
 
   return (
     <form className={s.form} onSubmit={handleSubmit}>
-      <label className={s.label}>
+      <label className={s.label} htmlFor={contactNameId}>
         Name
         <input
           className={s.input}
@@ -66,10 +69,10 @@ export default function ContactForm() {
           value={name}
           onChange={handleChange}
           title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
-          required
+          id={contactNameId}
         />
       </label>
-      <label className={s.label}>
+      <label className={s.label} htmlFor={contactNumberId}>
         Number
         <input
           className={s.input}
@@ -79,7 +82,7 @@ export default function ContactForm() {
           value={number}
           onChange={handleChange}
           title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
-          required
+          id={contactNumberId}
         />
       </label>
 
@@ -89,6 +92,3 @@ export default function ContactForm() {
     </form>
   );
 }
-ContactForm.propTypes = {
-  onSubmit: PropTypes.func,
-};

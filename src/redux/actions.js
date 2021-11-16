@@ -1,16 +1,15 @@
 import { createAction } from "@reduxjs/toolkit";
-import { v4 as uuidv4 } from "uuid";
 
-const addContact = createAction("contacts/add", (name, number) => ({
-  payload: {
-    id: uuidv4(),
-    name,
-    number,
-  },
-}));
+export const fetchContactRequest = createAction('contacts/fetchContactsRequest',);
+export const fetchContactSuccess = createAction('contacts/fetchContactsSuccess',);
+export const fetchContactError = createAction('contacts/fetchContactsError',);
 
-const changeFilter = createAction("contacts/changeFilter");
-const deleteContact = createAction("contacts/delete");
+export const addContactRequest = createAction('contacts/addContactsRequest',);
+export const addContactSuccess = createAction('contacts/addContactsSuccess',);
+export const addContactError = createAction('contacts/addContactsError',);
 
-const conractsActions = { addContact, changeFilter, deleteContact };
-export default conractsActions;
+export const deleteContactRequest = createAction('contacts/deleteContactsRequest',);
+export const deleteContactSuccess = createAction('contacts/deleteContactsSuccess',);
+export const deleteContactError = createAction('contacts/deleteContactsError',);
+
+export const changeFilter = createAction('contacts/changeFilter');
