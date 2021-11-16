@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import s from "./FormContact.module.css";
-import { useSelector, useDispatch } from "react-redux";
-import contactsOperations from "../../redux/operations";
-import { getContacts } from "../../redux/selectors";
-import shortid from "shortid";
+import React, { useState } from 'react';
+import s from './FormContact.module.css';
+import shortid from 'shortid';
+import { useSelector, useDispatch } from 'react-redux';
+import contactsOperations from '../../redux/operations';
+import { getContacts } from '../../redux/selectors';
 
 export default function ContactForm() {
-  const [name, setName] = useState("");
-  const [number, setNumber] = useState("");
+  const [name, setName] = useState('');
+  const [number, setNumber] = useState('');
 
   const contactNameId = shortid.generate();
   const contactNumberId = shortid.generate();
@@ -15,13 +15,13 @@ export default function ContactForm() {
   const dispatch = useDispatch();
   const contacts = useSelector(getContacts);
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     const { name, value } = e.currentTarget;
     switch (name) {
-      case "name":
+      case 'name':
         setName(value);
         break;
-      case "number":
+      case 'number':
         setNumber(value);
         break;
       default:
@@ -29,32 +29,31 @@ export default function ContactForm() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
 
-    if (name === "") {
+    if (name === '') {
       alert(`Введите, пожалуйста, имя контакта.`);
       return;
     }
 
-    if (number === "") {
+    if (number === '') {
       alert(`Введите, пожалуйста, номер телефона контакта.`);
       return;
     }
 
-    if (contacts.find((contact) => contact.name === name)) {
+    if (contacts.find(contact => contact.name === name)) {
       alert(`${name} is already in contacts.`);
       reset();
       return;
     }
-
     dispatch(contactsOperations.addContact(name, number));
     reset();
   };
 
   const reset = () => {
-    setName("");
-    setNumber("");
+    setName('');
+    setNumber('');
   };
 
   return (
@@ -65,9 +64,9 @@ export default function ContactForm() {
           className={s.input}
           type="text"
           name="name"
-          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           value={name}
           onChange={handleChange}
+          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
           id={contactNameId}
         />
@@ -76,19 +75,18 @@ export default function ContactForm() {
         Number
         <input
           className={s.input}
-          type="tel"
+          type="text"
           name="number"
-          pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           value={number}
           onChange={handleChange}
+          pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
           id={contactNumberId}
         />
       </label>
-
       <button className={s.button} type="submit">
         <span className={s.btnText}>Add contact</span>
-       </button>
+      </button>
     </form>
   );
 }

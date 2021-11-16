@@ -1,9 +1,10 @@
-import React from "react";
-import PropTypes from "prop-types";
-import s from "./Filter.module.css";
-import { useSelector, useDispatch } from "react-redux";
-import { getFilter } from "../../redux/selectors";
-import * as contactsActions from "../../redux/actions";
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { getFilter } from 'redux/selectors';
+import * as contactsActions from 'redux/actions';
+
+import PropTypes from 'prop-types';
+import s from './Filter.module.css';
 
 const Filter = () => {
   const value = useSelector(getFilter);
@@ -11,12 +12,12 @@ const Filter = () => {
 
   return (
     <label className={s.filterLabel}>
-      <h3>Find contacts by name</h3>
+      Find contacts by name
       <input
         className={s.filterInput}
         type="text"
         value={value}
-        onChange={(e) => dispatch(contactsActions.changeFilter(e.target.value))}
+        onChange={e => dispatch(contactsActions.changeFilter(e.target.value))}
       />
     </label>
   );

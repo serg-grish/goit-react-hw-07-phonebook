@@ -1,21 +1,21 @@
-import s from "./ContactsList.module.css";
-import React from "react";
-import PropTypes from "prop-types";
-import ContactListItem from "./ContactListItem/ContactListItem";
-import { useSelector, useDispatch } from "react-redux";
-import contactsOperation from "../../redux/operations";
-import { getVisibleContacts } from "../../redux/selectors";
+import s from './ContactsList.module.css';
+import React from 'react';
+import PropTypes from 'prop-types';
+import ContactListItem from './ContactListItem/ContactListItem';
+import { useSelector, useDispatch } from 'react-redux';
+import contactsOperations from '../../redux/operations';
+import { getVisibleContacts } from '../../redux/selectors';
 import { useEffect } from 'react';
 
 export default function ContactList() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(contactsOperation.fetchContacts());
+    dispatch(contactsOperations.fetchContacts());
   }, [dispatch]);
   const contacts = useSelector(getVisibleContacts);
 
-  const onDeleteContact = (id) => dispatch(contactsOperation.deleteContact(id));
+  const onDeleteContact = id => dispatch(contactsOperations.deleteContact(id));
 
   return (
     <ul className={s.list}>
@@ -37,6 +37,6 @@ ContactList.propTypes = {
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       number: PropTypes.string.isRequired,
-    })
+    }),
   ),
 };

@@ -4,6 +4,21 @@
         "name": "Serg",
         "number": "112233",
         "id": 1
+      },
+      {
+        "id": "05efa7ee-cec4-41c7-a3b6-7c033b0761c3",
+        "name": "Inna Palchynska",
+        "number": "0504809795"
+      },
+      {
+        "id": "bcf843b4-f03a-4575-971d-f79cecf80d70",
+        "name": "Rosie Simpson",
+        "number": "459-12-56"
+      },
+      {
+        "id": "ac911b8c-1b98-4496-a249-d260b26b9257",
+        "name": "Анар",
+        "number": "0956519614"
       }
     ]
   }
