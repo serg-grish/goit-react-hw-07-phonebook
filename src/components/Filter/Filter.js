@@ -1,31 +1,30 @@
-import React from 'react';
+import shortid from 'shortid';
+import { contactsSelectors } from '../../redux/contacts';
 import { useSelector, useDispatch } from 'react-redux';
-import { getFilter } from 'redux/selectors';
-import * as contactsActions from 'redux/actions';
-
-import PropTypes from 'prop-types';
+import { changeFilter } from '../../redux/contacts/contactsSlice';
 import s from './Filter.module.css';
 
 const Filter = () => {
-  const value = useSelector(getFilter);
-  const dispatch = useDispatch();
+    const filterInputId = shortid();
+    const value = useSelector(contactsSelectors.getFilter);
+    const dispatch = useDispatch();
 
-  return (
-    <label className={s.filterLabel}>
-      Find contacts by name
-      <input
-        className={s.filterInput}
-        type="text"
-        value={value}
-        onChange={e => dispatch(contactsActions.changeFilter(e.target.value))}
-      />
-    </label>
-  );
-};
-
-Filter.propTypes = {
-  value: PropTypes.string,
-  onChange: PropTypes.func,
+    return (
+        <>
+           <label className={s.filterLabel}>
+Find contacts by name
+<input
+  className={s.filterInput}
+  id={filterInputId}
+                    name="filter"
+  type="text"
+  value={value}
+  onChange={e => dispatch(changeFilter(e.target.value))}
+/>
+</label> 
+        </>
+    );
 };
 
 export default Filter;
+
